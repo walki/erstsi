@@ -1,11 +1,29 @@
 const canvas = document.getElementById('gameboard');
 const ctx = canvas.getContext('2d');
 
+const baseSize = 30;
+let block = {
+    x: 0,
+    y: 0,
+    dx: 0,
+    dy: baseSize,
+    width: baseSize,
+    height: baseSize,
+    color: 'red'
+};
+
+let gameState = {
+    baseSize: 30,
+    columns: 9,
+    rows: 30,
+    timeStep: 1000
+}
+
 function drawGrid() {
-    let colWidth = 30;
-    let rowHeight = 30;
-    let columns = 9;
-    let rows = 20;
+    let colWidth = baseSize;
+    let rowHeight = baseSize;
+    let columns = gameState.columns;
+    let rows = gameState.rows;
     canvas.width = columns * colWidth;
     canvas.height = rows * rowHeight;
 
@@ -35,4 +53,31 @@ function drawGrid() {
     }
 }
 
-drawGrid();
+
+function drawBlock(){
+    ctx.fillStyle = block.color;
+    ctx.fillRect(block.x, block.y, block.width, block.height);
+}
+
+function setBlockPosition() {
+    block.x += block.dx;
+    block.y += block.dy;
+}
+
+let prev = 0;
+function update(timestamp) {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    if (!prev) prev = timestamp;
+
+    drawGrid();
+    drawBlock();
+
+    let progress = timestamp - prev;
+    if (progress > gameState.timeStep) {
+        setBlockPosition();
+        prev = 0;
+    }
+    requestAnimationFrame(update);
+}
+
+update();

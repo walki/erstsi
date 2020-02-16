@@ -9,7 +9,7 @@ clone of shape fitting game
 [ x ] Node / express framework
 [ ] bootstrap
 [ x ] Create canvas for display
-[ ] Add grid to canvas
+[ x ] Add grid to canvas
 [ ] add first block
 [ ] Database for high scores
 [ ] Blocks - simple blocks to start
