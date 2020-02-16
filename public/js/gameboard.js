@@ -1,31 +1,37 @@
 const canvas = document.getElementById('gameboard');
 const ctx = canvas.getContext('2d');
 
-const baseSize = 30;
-let block = {
-    x: 0,
-    y: 0,
-    dx: 0,
-    dy: baseSize,
-    width: baseSize,
-    height: baseSize,
-    color: 'red'
-};
+function createNewBlock() {
+    let block = {
+        x: 0,
+        y: 0,
+        dx: 0,
+        dy: 30,
+        width: 30,
+        height: 30,
+        color: 'red'
+    };
+
+    return block;
+}
 
 let gameState = {
     baseSize: 30,
     columns: 9,
-    rows: 30,
-    timeStep: 1000
+    rows: 10,
+    timeStep: 1000,
+    activeBlock: undefined,
+    allBlocks: [],
+    prevBlockDropTime: 0
 }
 
+
+
 function drawGrid() {
-    let colWidth = baseSize;
-    let rowHeight = baseSize;
     let columns = gameState.columns;
     let rows = gameState.rows;
-    canvas.width = columns * colWidth;
-    canvas.height = rows * rowHeight;
+    canvas.width = columns * gameState.baseSize;
+    canvas.height = rows * gameState.baseSize;
 
     let gridColor = 'rgb(210,200,200)';
     let gridLineWidth = 1;
@@ -54,53 +60,69 @@ function drawGrid() {
 }
 
 
-function drawBlock(){
+function drawBlock(block){
     ctx.fillStyle = block.color;
     ctx.fillRect(block.x, block.y, block.width, block.height);
 }
 
-function dropBlock() {
+function dropBlock(block) {
     block.y += block.dy;
+
+    // Floor COllision
+    if (block.y + block.height > canvas.height) block.y = canvas.height - block.height;
+    return block;
 }
 
-function slideBlock() {
+function slideBlock(block) {
     block.x += block.dx;
     block.dx = 0;
+
+    // Wall Collisions
+    if (block.x < 0) block.x = 0;
+    if (block.x + block.width > canvas.width) block.x = canvas.width - block.width;
+    return block;
 }
 
-function moveBlockLeft() {
-    block.dx = -baseSize;
+function moveBlockLeft(block) {
+    block.dx = -gameState.baseSize;
+    return block;
 }
 
-function moveBlockRight() {
-    block.dx = baseSize;
+function moveBlockRight(block) {
+    block.dx = gameState.baseSize;
+    return block;
 }
 
 function keyDown(e) {
-    if (e.key === 'ArrowLeft') moveBlockLeft();
-    else if (e.key === 'ArrowRight') moveBlockRight();
+    if (e.key === 'ArrowLeft') moveBlockLeft(gameState.activeBlock);
+    else if (e.key === 'ArrowRight') moveBlockRight(gameState.activeBlock);
 }
 
+function gameStart(){
+    gameState.prevBlockDropTime = 0;
 
-let prev = 0;
+    gameState.activeBlock = createNewBlock();
+
+    document.addEventListener('keydown', keyDown);
+    update();
+}
+
 function update(timestamp) {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    if (!prev) prev = timestamp;
+    if (!gameState.prevBlockDropTime) gameState.prevBlockDropTime = timestamp;
 
     drawGrid();
-    drawBlock();
+    drawBlock(gameState.activeBlock);
 
-    slideBlock();
+    slideBlock(gameState.activeBlock);
 
-    let progress = timestamp - prev;
+    let progress = timestamp - gameState.prevBlockDropTime;
     if (progress > gameState.timeStep) {
-        dropBlock();
-        prev = 0;
+        dropBlock(gameState.activeBlock);
+        gameState.prevBlockDropTime = 0;
     }
-    console.log(timestamp, prev);
+
     requestAnimationFrame(update);
 }
 
-update();
-
-document.addEventListener('keydown', keyDown);
+gameStart();
