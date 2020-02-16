@@ -6,8 +6,11 @@ clone of shape fitting game
 
 [ x ] Wireframe of Initial UI
 [ ] Arch diagrams
-[ ] Node / express framework / bootstrap
-[ ] Create canvas for display
+[ x ] Node / express framework
+[ ] bootstrap
+[ x ] Create canvas for display
+[ ] Add grid to canvas
+[ ] add first block
 [ ] Database for high scores
 [ ] Blocks - simple blocks to start
 [ ] Block Animation
