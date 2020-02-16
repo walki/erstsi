@@ -59,10 +59,28 @@ function drawBlock(){
     ctx.fillRect(block.x, block.y, block.width, block.height);
 }
 
-function setBlockPosition() {
-    block.x += block.dx;
+function dropBlock() {
     block.y += block.dy;
 }
+
+function slideBlock() {
+    block.x += block.dx;
+    block.dx = 0;
+}
+
+function moveBlockLeft() {
+    block.dx = -baseSize;
+}
+
+function moveBlockRight() {
+    block.dx = baseSize;
+}
+
+function keyDown(e) {
+    if (e.key === 'ArrowLeft') moveBlockLeft();
+    else if (e.key === 'ArrowRight') moveBlockRight();
+}
+
 
 let prev = 0;
 function update(timestamp) {
@@ -72,12 +90,17 @@ function update(timestamp) {
     drawGrid();
     drawBlock();
 
+    slideBlock();
+
     let progress = timestamp - prev;
     if (progress > gameState.timeStep) {
-        setBlockPosition();
+        dropBlock();
         prev = 0;
     }
+    console.log(timestamp, prev);
     requestAnimationFrame(update);
 }
 
 update();
+
+document.addEventListener('keydown', keyDown);

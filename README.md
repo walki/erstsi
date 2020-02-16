@@ -10,16 +10,19 @@ clone of shape fitting game
 [ ] bootstrap
 [ x ] Create canvas for display
 [ x ] Add grid to canvas
-[ ] add first block
-[ ] Database for high scores
-[ ] Blocks - simple blocks to start
-[ ] Block Animation
-[ ] Player controls
+[ x ] add first block
+[ x ] Block Animation (drops)
+[ x ] Player controls - can move left and right
+[ ] Collision detection
+[ ] Making blocks at bottom collidable
+[ ] Blocks - 2 , 3 , 4 rectangles
+[ ] Rotation of blocks
 [ ] Scoring / levelling
 [ ] Timing
 [ ] Scoreboard
 [ ] Start / Pause
 [ ] Replay
+[ ] Database for high scores
 [ ] images instead of canvas path shapes?
 [ ] Canvas background
 [ ] Multiplayer options - PvP, Co-op...
