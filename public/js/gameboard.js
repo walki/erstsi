@@ -268,6 +268,22 @@ function drawInactiveBlocks() {
     gameState.inactiveBlocks.forEach(b => drawBlock(b));
 }
 
+function drawBlockMap() {
+    gameState.blockMap.forEach((arr, i) => {
+        arr.forEach((bl, j) => {
+            if (bl !== 'empty' && bl !== 'wall' && bl !== 'floor') {
+                ctx.fillStyle = bl;
+                ctx.fillRect((i - 1) * gameState.baseSize,
+                            j * gameState.baseSize,
+                            gameState.baseSize,
+                            gameState.baseSize);
+            }
+        });
+    })
+}
+
+
+
 function update(timestamp) {
 
     if (!gameState.gameOver) {
@@ -276,7 +292,7 @@ function update(timestamp) {
 
         drawGrid();
         drawBlock(gameState.activeBlock);
-        drawInactiveBlocks();
+        drawBlockMap();
 
         slideBlock(gameState.activeBlock);
 

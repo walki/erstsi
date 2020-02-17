@@ -22,6 +22,8 @@ clone of shape fitting game
 [ ] bootstrap
 [ ] Rotation of blocks
 [ ] Scoring / levelling
+[ ] Refactor to UI and Game components
+[ ] Unit testing
 [ ] Timing
 [ ] Scoreboard
 [ ] Sliding active screen
