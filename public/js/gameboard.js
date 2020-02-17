@@ -20,7 +20,7 @@ let gameState = {
     baseSize: 30,
     columns: 9,
     rows: 10,
-    timeStep: 200,
+    timeStep: 1000,
     activeBlock: undefined,
     inactiveBlocks: [],
     prevBlockDropTime: 0,
@@ -138,7 +138,7 @@ function checkCollision(block) {
 function mapToGridCoord(block) {
     let coords = {};
     coords.row = Math.floor(block.y / gameState.baseSize);
-    coords.col = Math.floor(block.x / gameState.baseSize);
+    coords.col = Math.floor(block.x / gameState.baseSize) + 1;
     return coords;
 }
 

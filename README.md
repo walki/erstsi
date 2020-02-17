@@ -17,7 +17,7 @@ clone of shape fitting game
 [ x ] Making blocks at bottom collidable
 [ ] Blocks - 2 , 3 , 4 rectangles
 [ ] Random selection of block type
-[ ]
+[ ] Clear row when all spots filled.
 [ ] Arch diagrams
 [ ] bootstrap
 [ ] Rotation of blocks
