@@ -18,6 +18,8 @@ clone of shape fitting game
 [ x ] Blocks - 2 , 3 , 4 rectangles
 [ x ] Random selection of block type
 [ ] Clear row when all spots filled.
+[ ] Move emptied rows down
+[ ] refator blockmap to be rows, cols instead of cols,rows
 [ ] Arch diagrams
 [ ] bootstrap
 [ ] Rotation of blocks

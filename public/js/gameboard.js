@@ -282,7 +282,38 @@ function drawBlockMap() {
     })
 }
 
+function findFullRows() {
+    let fullRows = [];
+    for (let row = 0; row < gameState.rows; row++){
+        let full = true;
+        for (let col = 1; col < gameState.columns + 1; col++){
+            if (gameState.blockMap[col][row] === 'empty') {
+                full = false;
+            }
+        }
+        if (full) fullRows.push(row);
+    }
+    return fullRows;
+}
 
+function clearFullRows() {
+    let fullRows = findFullRows();
+    fullRows.forEach(row => {
+        for (let col = 1; col < gameState.columns + 1; col++) {
+            gameState.blockMap[col][row] = 'empty';
+        }
+    });
+    return fullRows;
+}
+
+function removeEmptyRows(emptiedRows) {
+
+}
+
+function removeFullRows() {
+    let clearedRows = clearFullRows();
+    removeEmptyRows(clearedRows);
+}
 
 function update(timestamp) {
 
@@ -307,6 +338,7 @@ function update(timestamp) {
                     renderGameOver();
                     gameState.gameOver = true;
                 } else {
+                    removeFullRows();
                     gameState.activeBlock = createNewBlock();
                 }
             } else {
