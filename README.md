@@ -15,8 +15,8 @@ clone of shape fitting game
 [ x ] Move block from active to "Heap"
 [ x ] Create new active block
 [ x ] Making blocks at bottom collidable
-[ ] Blocks - 2 , 3 , 4 rectangles
-[ ] Random selection of block type
+[ x ] Blocks - 2 , 3 , 4 rectangles
+[ x ] Random selection of block type
 [ ] Clear row when all spots filled.
 [ ] Arch diagrams
 [ ] bootstrap
