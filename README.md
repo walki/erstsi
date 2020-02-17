@@ -12,9 +12,9 @@ clone of shape fitting game
 [ x ] Block Animation (drops)
 [ x ] Player controls - can move left and right
 [ x ] Collision detection - wall, floor
-[ ] Move block from active to "Heap"
-[ ] Create new active block
-[ ] Making blocks at bottom collidable
+[ x ] Move block from active to "Heap"
+[ x ] Create new active block
+[ x ] Making blocks at bottom collidable
 [ ] Blocks - 2 , 3 , 4 rectangles
 [ ] Random selection of block type
 [ ]
